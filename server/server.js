@@ -22,7 +22,7 @@ app.use(cors({
     origin: "*",
     methods: ["GET", "POST", "DELETE", "PATCH"],
 
-    credentials: true
+
 }))
 
 app.get('/ping', (req, res) => {

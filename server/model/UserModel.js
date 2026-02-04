@@ -29,10 +29,10 @@ const userSchema = new mongoose.Schema
                 enum: ["user", "admin"],
                 default: 'user'
             },
-            task: {
+            task: [{
                 type: mongoose.Schema.Types.ObjectId,
                 ref: "Task",
-            }
+            }]
 
         },
         {
@@ -42,4 +42,4 @@ const userSchema = new mongoose.Schema
         }
     )
 userModel = mongoose.model("User", userSchema)
-module.exports = { userModel }
+module.exports = userModel 

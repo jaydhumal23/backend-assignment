@@ -5,15 +5,25 @@ const taskSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    discription: {
+        type: String,
+        required: true,
+
+    },
     status: {
         type: String,
-        enum: ["pending", "completed"],
+        enum: ["pending", "inprogress", "completed"],
         default: "pending"
+    },
+    priority: {
+        type: String,
+        enum: ["high", "medium", "low"],
+        default: "medium"
     },
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
-       
+
     }
 }, { timestamps: true })
 module.exports = mongoose.model("Task", taskSchema)

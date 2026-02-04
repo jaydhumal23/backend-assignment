@@ -6,60 +6,32 @@ const cors = require("cors")
 const cookieParser = require("cookie-parser")
 const connectDB = require("./config/connectDB")
 const userRoute = require("./routes/UserRoute")
+const swaggerUi = require("swagger-ui-express");
 const taskRoute = require("./routes/TaskRoute")
 dotenv.config()
-
+const swaggerDocument = require("./swaggerDocs.js");
 const PORT = process.env.PORT || 3000
 
-const swaggerUi = require("swagger-ui-express");
-const swaggerJsdoc = require("swagger-jsdoc");
+
 
 connectDB()
 app.use(cookieParser())
 app.use(express.json())
 
 app.use(cors({
-    origin: ["http://localhost:8080", "https://backendassign-1jay.vercel.app"],
+    origin: ["http://localhost:8080", "https://backendassign-1jay.vercel.app", "https://backend-assignment-lf5m.onrender.com/"],
     methods: ["GET", "POST", "DELETE", "PATCH"],
 
     credentials: true
 }))
 
+app.get('/ping', (req, res) => {
+    res.status(200).send('Pong');
+});
 
 
-const swaggerOptions = {
-    definition: {
-        openapi: "3.0.0",
-        info: {
-            title: "Backend Intern Assignment API",
-            version: "1.0.0",
-            description: "Secure Task Management API with JWT Authentication",
-        },
-        servers: [
-            {
-                url: "https://backendassign-1jay.vercel.app", // Your backend Render URL
-                description: "Production server"
-            },
-            {
-                url: "http://localhost:3000",
-                description: "Local development server"
-            }
-        ],
-        components: {
-            securitySchemes: {
-                bearerAuth: {
-                    type: "http",
-                    scheme: "bearer",
-                    bearerFormat: "JWT",
-                },
-            },
-        },
-    },
-    apis: ["./routes/*.js"],
-};
 
-const swaggerSpec = swaggerJsdoc(swaggerOptions);
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use("/api/user", userRoute)
 app.use("/api/task", taskRoute)

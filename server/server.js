@@ -19,11 +19,13 @@ app.use(cookieParser())
 app.use(express.json())
 
 app.use(cors({
-    origin: "*",
+    origin: [
+        "http://localhost:8080",
+        "https://backendassign-1jay.vercel.app",
+        "https://backend-assignment-lf5m.onrender.com"],
     methods: ["GET", "POST", "DELETE", "PATCH"],
-
-
-}))
+    credentials: true
+}));
 
 app.get('/ping', (req, res) => {
     res.status(200).send('Pong');

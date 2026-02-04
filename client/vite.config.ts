@@ -8,9 +8,10 @@ export default defineConfig(({ mode }) => ({
   server: {
     proxy:{
      '/api': {
-        target: 'https://backend-assignment-lf5m.onrender.com', // 2. Forwards to your Backend
+        target: 'https://backend-assignment-lf5m.onrender.com/', // 2. Forwards to your Backend
         changeOrigin: true,
         secure: true,
+         rewrite: (path) => path 
       },
     },
     port: 8080,

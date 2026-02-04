@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { useTasks } from '../hooks/useTasks';
 import { useToast } from '../hooks/use-toast';
-import { Task } from '../lib/mockApi';
+import { Task } from '../lib/Api';
 import TaskCard from '../components/TaskCard';
 import TaskDialog from '../components/TaskDialog';
 import { Button } from '../components/ui/button';
@@ -44,13 +44,13 @@ const Dashboard = () => {
   const stats = {
     total: tasks.length,
     pending: tasks.filter(t => t.status === 'pending').length,
-    inProgress: tasks.filter(t => t.status === 'in_progress').length,
+    inProgress: tasks.filter(t => t.status === 'inprogress').length,
     completed: tasks.filter(t => t.status === 'completed').length,
   };
 
   const handleCreateOrUpdate = async (data: { title: string; description?: string; status: Task['status']; priority: Task['priority'] }) => {
     if (editingTask) {
-      const result = await updateTask(editingTask.id, data);
+      const result = await updateTask(editingTask._id, data);
       if (result.success) {
         toast({ title: "Task updated", description: "Your task has been updated successfully." });
       } else {
@@ -240,7 +240,7 @@ const Dashboard = () => {
                   <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                     {filteredTasks.map(task => (
                       <TaskCard
-                        key={task.id}
+                        key={task._id}
                         task={task}
                         onEdit={handleEdit}
                         onDelete={handleDelete}

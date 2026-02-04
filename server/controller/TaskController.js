@@ -11,13 +11,28 @@ const createTask = async (req, res) => {
             priority,
             user: req.user.id
         });
-
+    await userModel.findByIdAndUpdate(req.user.id, {
+        $push: { task: task._id }
+    })
+    await task.populate("user", "name email")
     res.status(201).json({ success: true, task });
 }
 
 const getTasks = async (req, res) => {
-    const tasks = await taskModel.find();
-    res.status(200).json({ success: true, tasks });
+    try {
+        // --- BONUS CHANGE: Filter Tasks based on Role ---
+        let tasks;
+        if (req.user.role === "admin") {
+            // Admin sees ALL tasks + who owns them
+            tasks = await taskModel.find().populate("user", "name email");
+        } else {
+            // User sees ONLY their own tasks
+            tasks = await taskModel.find({ user: req.user.id }).populate("user", "name email");
+        }
+        res.status(200).json({ success: true, tasks });
+    } catch (error) {
+        res.status(500).json({ success: false, error: error.message });
+    }
 }
 const updateTask = async (req, res) => {
     const { id } = req.params;

@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
-import { authApi, initializeDemoData, type User, type Role } from '../lib/mockApi';
+import { authApi, initializeDemoData, type User, type Role } from '../lib/Api';
 
 interface AuthContextType {
   user: Omit<User, 'password'> | null;
@@ -17,12 +17,18 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [user, setUser] = useState<Omit<User, 'password'> | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
+ useEffect(() => {
     const initAuth = async () => {
-      await initializeDemoData();
-      const currentUser = authApi.getCurrentUser();
-      setUser(currentUser);
-      setIsLoading(false);
+      try {
+     
+        const currentUser = await authApi.getCurrentUser(); 
+        setUser(currentUser);
+      } catch (error) {
+        console.error("Auth check failed:", error);
+        setUser(null);
+      } finally {
+        setIsLoading(false);
+      }
     };
     initAuth();
   }, []);
@@ -63,6 +69,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const useAuth = (): AuthContextType => {
   const context = useContext(AuthContext);
   if (context === undefined) {

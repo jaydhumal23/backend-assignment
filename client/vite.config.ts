@@ -6,7 +6,13 @@ import { componentTagger } from "lovable-tagger";
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
   server: {
-    host: "::",
+    proxy:{
+     '/api': {
+        target: 'http://localhost:3000', // 2. Forwards to your Backend
+        changeOrigin: true,
+        secure: false,
+      },
+    },
     port: 8080,
     hmr: {
       overlay: false,
@@ -18,4 +24,5 @@ export default defineConfig(({ mode }) => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  
 }));

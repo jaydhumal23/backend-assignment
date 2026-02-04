@@ -1,5 +1,5 @@
 import { useState, useCallback, useEffect } from 'react';
-import { tasksApi, type Task, taskSchema } from '../lib/mockApi';
+import { tasksApi, type Task, taskSchema } from '../lib/Api';
 import { z } from 'zod';
 
 export const useTasks = () => {
@@ -35,7 +35,7 @@ export const useTasks = () => {
   const updateTask = useCallback(async (id: string, data: Partial<z.infer<typeof taskSchema>>) => {
     const response = await tasksApi.update(id, data);
     if (response.success && response.data) {
-      setTasks(prev => prev.map(t => t.id === id ? response.data! : t));
+      setTasks(prev => prev.map(t => t._id === id ? response.data! : t));
       return { success: true, task: response.data };
     }
     return { success: false, error: response.error };
@@ -44,7 +44,7 @@ export const useTasks = () => {
   const deleteTask = useCallback(async (id: string) => {
     const response = await tasksApi.delete(id);
     if (response.success) {
-      setTasks(prev => prev.filter(t => t.id !== id));
+      setTasks(prev => prev.filter(t => t._id !== id));
       return { success: true };
     }
     return { success: false, error: response.error };

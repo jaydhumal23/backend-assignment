@@ -213,7 +213,7 @@ const Dashboard = () => {
               <TabsList className="mb-6">
                 <TabsTrigger value="all">All ({stats.total})</TabsTrigger>
                 <TabsTrigger value="pending">Pending ({stats.pending})</TabsTrigger>
-                <TabsTrigger value="in_progress">In Progress ({stats.inProgress})</TabsTrigger>
+                <TabsTrigger value="inprogress">In Progress ({stats.inProgress})</TabsTrigger>
                 <TabsTrigger value="completed">Completed ({stats.completed})</TabsTrigger>
               </TabsList>
 

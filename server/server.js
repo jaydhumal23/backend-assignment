@@ -18,7 +18,7 @@ app.use(express.json())
 
 app.use(cors({
     origin: "http://localhost:8080",
-    methods: ["GET", "POST"],
+    methods: ["GET", "POST", "DELETE", "PATCH"],
 
     credentials: true
 }))

@@ -17,7 +17,7 @@ app.use(cookieParser())
 app.use(express.json())
 
 app.use(cors({
-    origin: "http://localhost:8080",
+    origin: ["http://localhost:8080", "https://backend-assignment-lf5m.onrender.com"],
     methods: ["GET", "POST", "DELETE", "PATCH"],
 
     credentials: true

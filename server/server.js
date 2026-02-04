@@ -17,7 +17,7 @@ app.use(cookieParser())
 app.use(express.json())
 
 app.use(cors({
-    origin: "https://backend-assignment-lf5m.onrender.com",
+    origin: ["http://localhost:8080", "https://backendassign-1jay.vercel.app"],
     methods: ["GET", "POST", "DELETE", "PATCH"],
 
     credentials: true

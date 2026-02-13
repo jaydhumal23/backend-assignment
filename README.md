@@ -3,8 +3,8 @@
 ### Live Links
 
 - **Frontend UI (Vercel):** https://backendassign-1jay.vercel.app
-- **Backend API (Render):** https://backend-assignment-lf5m.onrender.com/
-- **API Documentation (Swagger):** https://backend-assignment-lf5m.onrender.com/api-docs
+- **Backend API (Render):** https://mega-backend-eamr.onrender.com/
+- **API Documentation (Swagger):** https://mega-backend-eamr.onrender.com/task/api-docs
 
 ### Tech Stack
 

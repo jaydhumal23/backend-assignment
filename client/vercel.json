@@ -3,7 +3,7 @@
     "routes": [
         {
             "src": "/api/(.*)",
-            "dest": "https://mega-backend-eamr.onrender.com/task/api/$1"
+            "dest": "https://mega-backend-1jay.onrender.com/task/api/$1"
         },
         {
             "handle": "filesystem"

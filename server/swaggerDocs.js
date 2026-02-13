@@ -7,7 +7,7 @@ const swaggerDocument = {
     },
     servers: [
         {
-            url: "https://mega-backend-eamr.onrender.com/", // Your Render Backend URL
+            url: "https://mega-backend-1jay.onrender.com", // Your Render Backend URL
             description: "Production server"
         },
         {

@@ -37,7 +37,7 @@ const getTasks = async (req, res) => {
 const updateTask = async (req, res) => {
     const { id } = req.params;
     const { title, description, status, priority } = req.body;
-    const task = await taskModel.findByIdAndUpdate(id, { title, description, status, priority }, { new: true });
+    const task = await taskModel.findByIdAndUpdate(id, { title, description, status, priority }, { returnDocument: 'after' });
     res.status(200).json({ success: true, task });
 }
 const deleteTask = async (req, res) => {
